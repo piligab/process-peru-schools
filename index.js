@@ -1,48 +1,23 @@
-var fs = require('fs')
-var turf = require('turf')
-var _ = require('underscore')
-var file = argv.schools
-var grid = argv.grid
-var folder = argv.folder
-var format = require('./format')
-var tags = require('./tags')
+#!/usr/bin/env node
 
-function split() {
-  return new Promise(function(resolve, reject) {
-    fs.readFile(readFile, 'utf8', function(err, features) {
-      features = JSON.parse(features)
-      fs.readFile(grid, 'utf8', function(err, poligons) {
-        var output = {}
-        poligons = JSON.parse(poligons)
-        console.log(poligons.features.length);
-        for (var z = 0; z < poligons.features.length; z++) {
-          var poli = poligons.features[z]
-          for (var i = 0; i < features.features.length; i++) {
-            if (turf.inside(features.features[i], poli)) {
-              features.features[i] = format(features.features[i])
-              features.features[i] = tags(features.features[i])
-              console.log(poli.properties.id);
-              if (output[poli.properties.id]) {
-                output[poli.properties.id].push(features.features[i])
-              } else {
-                output[poli.properties.id] = [features.features[i]]
-              }
-            }
-          }
-        }
-        return resolve(output)
-      })
-    })
-  })
+'use strict'
+var program = require('commander')
+var argv = require('minimist')(process.argv.slice(2))
+var formatTags = require('./src/formatTags')
+var splitGRid = require('./src/splitGRid')
+
+program
+	.version('0.0.1')
+	.option('-f, --formatTags', 'formatTags')
+	.option('-s, --splitGrid', 'split to grid')
+	.parse(process.argv)
+
+var file = process.argv.slice(2)[1]
+var folder = process.argv.slice(2)[2]
+
+if (program.formatTags) {
+	formatTags(file)
 }
-
-split().then(response => {
-  for (var grid in response) {
-    console.log('save...' + grid);
-    var objs = {
-      'type': 'FeatureCollection',
-      'features': response[grid]
-    }
-    fs.writeFileSync(folder + grid + '.geojson', JSON.stringify(objs));
-  }
-}).catch(console.log);
+if (program.splitGrid) {
+	splitGRid(file, folder, argv.zoom)
+}

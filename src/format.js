@@ -1,4 +1,9 @@
-module.exports = function(obj) {
+var _ = require('underscore')
+module.exports = {
+  replaceSC
+}
+
+function replaceSC(obj) {
   if (_.isArray(obj)) {
     for (var k = 0; k < obj.length; k++) {
       obj[k] = replaceSC(obj[k])

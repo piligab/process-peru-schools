@@ -13,6 +13,18 @@ npm link
 
 ## Usage
 
+### format
+
 ```
-peruschools --file <geojson-file> --grid=<geojson-gridFiles> --folder=<Folder to save the output>
+peruschools -f file.geojson > output.geojson
+
+```
+
+### split
+
+The split should be for Peru, 
+
+```
+peruschools -f file.geojson tmp --zoom=15
+
 ```

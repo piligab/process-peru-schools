@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "bin": {
-    "peruschools": "index.js"
+    "peru": "index.js"
   },
   "main": "index.js",
   "dependencies": {
+    "@mapbox/tile-cover": "^3.0.2",
     "minimist": "^1.2.0",
-    "underscore": "^1.8.3",
-    "turf": "^3.0.14"
+    "turf": "^3.0.14",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "standard": "^10.0.3"
