@@ -1,5 +1,4 @@
 var fs = require('fs')
-var turf = require('turf')
 var _ = require('underscore')
   // var file = argv.schools
   // var grid = argv.grid

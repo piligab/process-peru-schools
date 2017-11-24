@@ -8,10 +8,11 @@
   "main": "index.js",
   "dependencies": {
     "@mapbox/tile-cover": "^3.0.2",
+    "@turf/turf": "^5.0.4",
+    "commander": "^2.9.0",
     "minimist": "^1.2.0",
-    "turf": "^3.0.14",
-    "underscore": "^1.8.3",
-    "commander": "^2.9.0"
+    "rbush": "^2.0.1",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "standard": "^10.0.3"
