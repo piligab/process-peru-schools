@@ -12,6 +12,7 @@ module.exports = function(file, folder, zoom) {
 		'type': 'FeatureCollection',
 		'features': []
 	}
+	var objGrid = {};
 	var output = {};
 	var points = JSON.parse(fs.readFileSync(file, 'utf8'));
 	var geojson = cover.geojson(poly.features[0].geometry, limits);
@@ -27,10 +28,11 @@ module.exports = function(file, folder, zoom) {
 				} else {
 					output[poli.properties.id] = [points.features[p]];
 				}
-				geoGrid.features.push(poli);
+				objGrid[poli.properties.id] = poli;
 			}
 		}
 	}
+	geoGrid.features = _.values(objGrid)
 	for (var grid in output) {
 		// console.log('save...subl' + grid);
 		var objs = {
