@@ -18,19 +18,26 @@ module.exports = function(obj) {
   if (obj.properties.nivel && obj.properties.nivel.indexOf('Jardín') > -1) {
     newprops.amenity = 'kindergarten';
     delete newprops['isced:level']
+
     if (_.isNumber(newprops.name)) {
-      newprops.name = 'Institución Educativa Inicial ' + newprops.name;
+      newprops.name = 'Institución educativa inicial No. ' + newprops.name;
+    } else {
+      newprops.name = 'Institución educativa inicial ' + newprops.name;
     }
   }
   if (obj.properties.nivel && obj.properties.nivel.indexOf('Primaria') > -1) {
     newprops['isced:level'] = 'primary'
     if (_.isNumber(newprops.name)) {
+      newprops.name = 'Institución Educativa No. ' + newprops.name;
+    } else {
       newprops.name = 'Institución Educativa ' + newprops.name;
     }
   }
   if (obj.properties.nivel && obj.properties.nivel.indexOf('Secundaria') > -1) {
     newprops['isced:level'] = 'secondary'
     if (_.isNumber(newprops.name)) {
+      newprops.name = 'Institución educativa No. ' + newprops.name;
+    } else {
       newprops.name = 'Institución Educativa ' + newprops.name;
     }
   }

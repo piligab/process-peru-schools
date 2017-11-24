@@ -4,7 +4,7 @@
 var program = require('commander')
 var argv = require('minimist')(process.argv.slice(2))
 var formatTags = require('./src/formatTags')
-var splitGRid = require('./src/splitGRid')
+var splitGrid = require('./src/splitGrid')
 
 program
 	.version('0.0.1')
@@ -19,5 +19,5 @@ if (program.formatTags) {
 	formatTags(file)
 }
 if (program.splitGrid) {
-	splitGRid(file, folder, argv.zoom)
+	splitGrid(file, folder, argv.zoom)
 }

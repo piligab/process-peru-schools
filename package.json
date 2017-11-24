@@ -10,13 +10,15 @@
     "@mapbox/tile-cover": "^3.0.2",
     "minimist": "^1.2.0",
     "turf": "^3.0.14",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "commander": "^2.9.0"
   },
   "devDependencies": {
     "standard": "^10.0.3"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "standard src/*.js *.js",
+    "fix": "standard --fix src/*.js *.js"
   },
   "repository": {
     "type": "git",

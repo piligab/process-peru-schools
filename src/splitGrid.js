@@ -3,7 +3,7 @@ var turf = require('turf')
 var _ = require('underscore')
 var cover = require('@mapbox/tile-cover');
 var poly = require('./peru.json')
-module.exports = function(file, folder,zoom) {
+module.exports = function(file, folder, zoom) {
 	var limits = {
 		min_zoom: zoom,
 		max_zoom: zoom
@@ -39,5 +39,5 @@ module.exports = function(file, folder,zoom) {
 		}
 		fs.writeFileSync(folder + '/' + grid + '.geojson', JSON.stringify(objs));
 	}
-	fs.writeFileSync('grid.geojson', JSON.stringify(geoGrid));
+	fs.writeFileSync(file.split('.')[0] + '-grid.geojson', JSON.stringify(geoGrid));
 }
