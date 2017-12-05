@@ -10,7 +10,6 @@
     "@mapbox/tile-cover": "^3.0.2",
     "@turf/turf": "^5.0.4",
     "commander": "^2.9.0",
-    "cross-env": "^5.1.1",
     "increase-memory-limit": "^1.0.5",
     "minimist": "^1.2.0",
     "rbush": "^2.0.1",
@@ -20,9 +19,9 @@
     "standard": "^10.0.3"
   },
   "scripts": {
-    "memory": "./node_modules/.bin/cross-env LIMIT=12048 increase-memory-limit",
-    "test": "standard src/*.js *.js",
-    "fix": "standard --fix src/*.js *.js"
+    "fix": "eslint --fix src index.js",
+    "lint": "eslint src index.js",
+    "format": "prettier --single-quote --write --print-width 120 \"src/*.js\""
   },
   "repository": {
     "type": "git",
