@@ -30,6 +30,7 @@ function pro(points, zoom) {
 	pre(points, zoom);
 
 	function pre(Pointsfeatures, z) {
+		console.log(z);
 		var bboxPolygon = turf.bboxPolygon(turf.bbox(Pointsfeatures));
 		var output = {};
 		var limits = {
@@ -54,12 +55,9 @@ function pro(points, zoom) {
 			bboxesPoints.push(objBbox(point, p + 'p'));
 			objects[id] = point;
 		}
-
 		var bboxes = bboxesPoints.concat(bboxesPolys);
 		var tree = rbush(bboxes.length);
 		tree.load(bboxes);
-
-		// var output = {};
 		for (var j = 0; j < bboxesPolys.length; j++) {
 			var bbox = bboxesPolys[j];
 			var poli = objects[bbox.id];
@@ -70,11 +68,9 @@ function pro(points, zoom) {
 					if (overlap.id !== bbox.id) {
 						var point = objects[overlap.id];
 						if (point.geometry.type === 'Point') {
-
 							if (turf.inside(point, poli)) {
 								if (output[poli.properties.id]) {
 									output[poli.properties.id].features.push(point);
-									// output[poli.properties.id].grid.push(poli);
 								} else {
 									output.features = {}
 									output[poli.properties.id] = {};
@@ -89,7 +85,7 @@ function pro(points, zoom) {
 		}
 		_.each(output, function(v, k) {
 			process.stdout.write('=>' + z);
-			if (v.features && v.features.length > 20 && z <= 13) {
+			if (v.features && v.features.length > 40 && z <= 15) {
 				pre(turf.featureCollection(v.features), z + 1)
 			} else {
 				totalOutput[k] = v;
