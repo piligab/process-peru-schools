@@ -1,7 +1,6 @@
-var _ = require('underscore')
+var _ = require('underscore');
 
 module.exports = function(obj) {
-
   var newprops = {};
   newprops.amenity = 'school';
   newprops.name = capitalize(obj.properties.nom_iiee);
@@ -9,7 +8,7 @@ module.exports = function(obj) {
   newprops['isced:level'] = capitalize(obj.properties.nivel);
   newprops['addr:state'] = capitalize(obj.properties.departamen);
   newprops['addr:province'] = capitalize(obj.properties.provincia);
-  newprops['adrr:district'] = capitalize(obj.properties.distrito);
+  newprops['addr:district'] = capitalize(obj.properties.distrito);
   newprops['addr:subdistrict'] = capitalize(obj.properties.nom_ccpp);
   newprops.ele = obj.properties.altitud;
   newprops.source = 'minedu.gob.pe';
@@ -17,7 +16,7 @@ module.exports = function(obj) {
 
   if (obj.properties.nivel && obj.properties.nivel.indexOf('Jardín') > -1) {
     newprops.amenity = 'kindergarten';
-    delete newprops['isced:level']
+    delete newprops['isced:level'];
 
     if (_.isNumber(newprops.name)) {
       newprops.name = 'Institución educativa inicial No. ' + newprops.name;
@@ -26,7 +25,7 @@ module.exports = function(obj) {
     }
   }
   if (obj.properties.nivel && obj.properties.nivel.indexOf('Primaria') > -1) {
-    newprops['isced:level'] = 'primary'
+    newprops['isced:level'] = 'primary';
     if (_.isNumber(newprops.name)) {
       newprops.name = 'Institución Educativa No. ' + newprops.name;
     } else {
@@ -34,7 +33,7 @@ module.exports = function(obj) {
     }
   }
   if (obj.properties.nivel && obj.properties.nivel.indexOf('Secundaria') > -1) {
-    newprops['isced:level'] = 'secondary'
+    newprops['isced:level'] = 'secondary';
     if (_.isNumber(newprops.name)) {
       newprops.name = 'Institución educativa No. ' + newprops.name;
     } else {
@@ -50,13 +49,13 @@ module.exports = function(obj) {
   }
   obj.properties = newprops;
   return obj.properties ? obj : null;
-}
+};
 
 function capitalize(str) {
   if (typeof str == 'string') {
     return str.toLowerCase().replace(/(^|\s)([a-z])/g, function(m, p1, p2) {
       return p1 + p2.toUpperCase();
-    })
+    });
   }
   return str;
 }
