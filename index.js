@@ -6,12 +6,16 @@ var argv = require('minimist')(process.argv.slice(2));
 var formatTags = require('./src/formatTags');
 var splitGrid = require('./src/splitGrid');
 var simpleCoords = require('./src/simpleCoords');
+var grid = require('./src/grid');
+
 
 program
   .version('0.0.1')
   .option('-f, --formatTags', 'format  the data to OSM tags')
   .option('-s, --splitGrid', 'split to grid')
   .option('-a, --simpleCoords', 'simpleCoords')
+   .option('-g, --grid', 'simpleCoords')
+
   .parse(process.argv);
 
 var file = process.argv.slice(2)[1];
@@ -25,4 +29,8 @@ if (program.splitGrid) {
 }
 if (program.simpleCoords) {
   simpleCoords(file);
+}
+
+if (program.grid) {
+  grid(file,argv.zoom);
 }
